@@ -1,0 +1,27 @@
+import re
+patterns = [
+    (r'\b[Ii]n|[Oo]n|[Aa]t|[Ww]ith\b', 'PREP'), 
+    (r'\b[Aa]nd|[Oo]r|[Bb]ut\b', 'CONJ'),  
+    (r'\b[Tt]he|[Aa]|[Aa]n\b', 'DET'),  
+    (r'\b[Ii]s|[Aa]m|[Aa]re|[Ww]as|[Ww]ere|[Bb]e|[Bb]een\b', 'VERB'),  
+    (r'\b[Rr]un|[Ww]alk|[Jj]ump|[Ss]ing\b', 'VERB'),  
+    (r'\b[A-Z][a-z]+\b', 'NOUN'),   
+    (r'\b[0-9]+\b', 'NUM'),  
+    (r'\b[Hh]e|[Ss]he|[Tt]hey|[Ww]e|[Ii]|[Yy]ou\b', 'PRON'),  
+    (r'\b[Qq]uickly|[Ss]lowly|[Hh]appily\b', 'ADV'),  
+    (r'\b[Qq]uick|[Ss]low|[Hh]appy\b', 'ADJ'),  
+]
+def pos_tag(sentence):
+    words = sentence.split()
+    tagged_words = []
+    
+    for word in words:
+        tag = 'UNK'  
+        for pattern, pos in patterns:
+            if re.fullmatch(pattern, word):
+                tag = pos
+                break
+        tagged_words.append((word, tag))
+    return tagged_words
+sentence = "The quick brown fox jumps over the lazy dog"
+print(pos_tag(sentence))

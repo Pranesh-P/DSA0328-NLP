@@ -1,0 +1,16 @@
+import nltk
+from nltk.tokenize import word_tokenize
+from nltk.stem import PorterStemmer, WordNetLemmatizer
+from nltk.corpus import wordnet
+nltk.download("punkt")
+nltk.download("wordnet")
+nltk.download("omw-1.4")
+text = "The cats are running faster than the dogs. The leaves have fallen from the trees."
+words = word_tokenize(text)
+stemmer = PorterStemmer()
+lemmatizer = WordNetLemmatizer()
+stemmed_words = [stemmer.stem(word) for word in words]
+lemmatized_words = [lemmatizer.lemmatize(word, wordnet.VERB) for word in words] 
+print("Original Words:", words)
+print("Stemmed Words:", stemmed_words)
+print("Lemmatized Words:", lemmatized_words)
